@@ -21,5 +21,36 @@ Explanation:
 There is no index that satisfies the conditions in the problem statement.
 """
 def pivot_index(nums):
-    # Your code here
 
+    for i in range(len(nums)):
+        # check if the index is a pivot index
+        # sum all numbers tot he left of index
+        left_sub_list = nums[0:i]
+        sum_1 = sum(left_sub_list)
+        # sum all numbers to the right
+        right_sub_list = nums[i+1:-1]
+        sum_r = sum(right_sub_list)
+        if sum_1 == sum_r:
+            return i
+
+    return -1
+
+
+def pivot_index(nums):
+    left_sum = 0
+    right_sum = sum(nums)
+    for i in range(len(nums)):
+        # everytime we get to a new index
+        # subtract that index, from right_sum
+        right_sum -= nums[i]
+        if right_sum == left_sum:
+            return i
+        left_sum += nums[i]
+    return -1
+
+
+print(pivot_index([1,7,3,6,5,6]))
+print(pivot_index([1,2,3]))
+print(pivot_index([11,0,0,11]))
+print(pivot_index([10]))
+print(pivot_index([]))
